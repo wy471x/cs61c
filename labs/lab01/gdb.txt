@@ -39,10 +39,16 @@ ANSWER:
    for lldb
    "continue"
 6. How can you print the value of a variable (or even an expression like 1+2) in gdb?
-   for gdb:
+   for gdb
    "p [/f] expr"
-   for lldb:
+   for lldb
    "p expr"
-7.
-8.
-9.
+7. How do you configure gdb so it displays the value of a variable after every step?
+
+8. How do you show a list of all variables and their values in the current function?
+
+9. How do you quit out of gdb?
+   for gdb
+   "quit" or "q"
+   for lldb
+   "quit" or "q"
