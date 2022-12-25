@@ -28,6 +28,16 @@
  */
 #include <string.h>
 
+/**
+ * Math utility routines.
+ */
+#include <math.h>
+
+/**
+ *
+ */
+#include <unistd.h>
+
 /*
  * This hash table stores the dictionary.
  */
@@ -39,28 +49,28 @@ HashTable *dictionary;
  * the grading process.
  */
 int main(int argc, char **argv) {
-  if (argc != 2) {
-    fprintf(stderr, "Specify a dictionary\n");
+    if (argc != 2) {
+        fprintf(stderr, "Specify a dictionary\n");
+        return 0;
+    }
+    /*
+     * Allocate a hash table to store the dictionary.
+     */
+    fprintf(stderr, "Creating hashtable\n");
+    dictionary = createHashTable(2255, &stringHash, &stringEquals);
+
+    fprintf(stderr, "Loading dictionary %s\n", argv[1]);
+    readDictionary(argv[1]);
+    fprintf(stderr, "Dictionary loaded\n");
+
+    fprintf(stderr, "Processing stdin\n");
+    processInput();
+
+    /*
+     * The MAIN function in C should always return 0 as a way of telling
+     * whatever program invoked this that everything went OK.
+     */
     return 0;
-  }
-  /*
-   * Allocate a hash table to store the dictionary.
-   */
-  fprintf(stderr, "Creating hashtable\n");
-  dictionary = createHashTable(2255, &stringHash, &stringEquals);
-
-  fprintf(stderr, "Loading dictionary %s\n", argv[1]);
-  readDictionary(argv[1]);
-  fprintf(stderr, "Dictionary loaded\n");
-
-  fprintf(stderr, "Processing stdin\n");
-  processInput();
-
-  /*
-   * The MAIN function in C should always return 0 as a way of telling
-   * whatever program invoked this that everything went OK.
-   */
-  return 0;
 }
 
 /*
@@ -69,8 +79,15 @@ int main(int argc, char **argv) {
  * for convenience.
  */
 unsigned int stringHash(void *s) {
-  char *string = (char *)s;
-  // -- TODO --
+    char *string = (char *) s;
+    // -- TODO --
+    int hashCode = 0, len = strlen(string), i = 0;
+    while (*string != '\0') {
+        hashCode += pow(27, (len - 1 - i));
+        i++;
+        string++;
+    }
+    return hashCode % dictionary->size;
 }
 
 /*
@@ -78,9 +95,23 @@ unsigned int stringHash(void *s) {
  * (case sensitive comparison) and 0 otherwise.
  */
 int stringEquals(void *s1, void *s2) {
-  char *string1 = (char *)s1;
-  char *string2 = (char *)s2;
-  // -- TODO --
+    char *string1 = (char *) s1;
+    char *string2 = (char *) s2;
+
+    // -- TODO --
+    int len1 = strlen(string1), len2 = strlen(string2);
+    if (len1 != len2) {
+        return 0;
+    }
+
+    while (*string1 != '\0') {
+        if (*string1 != *string2) {
+            return 0;
+        }
+        string1++;
+        string2++;
+    }
+    return 1;
 }
 
 /*
@@ -100,7 +131,17 @@ int stringEquals(void *s1, void *s2) {
  * arbitrarily long dictionary chacaters.
  */
 void readDictionary(char *dictName) {
-  // -- TODO --
+    // -- TODO --
+    if (access(dictName, F_OK) != 0) {
+        fprintf(stderr, "specified file is not exist.");
+        exit(1);
+    }
+
+    FILE *fp = fopen(dictName, "r");
+    char word[60];
+    while (fscanf(fp, "%s", word)) {
+        insertData(dictionary, word);
+    }
 }
 
 /*
@@ -125,5 +166,12 @@ void readDictionary(char *dictName) {
  * final 20% of your grade, you cannot assume words have a bounded length.
  */
 void processInput() {
-  // -- TODO --
+    // -- TODO --
+    char strings[100];
+    gets(strings);
+    int i = 0, j =0;
+    char newString[200], word[60];
+    while (strings[i] != '\0') {
+
+    }
 }
