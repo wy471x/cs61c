@@ -7,7 +7,7 @@ LDFLAGS = -g -Wall
 all : philspel
 
 philspel : philspel.o hashtable.o
-	$(CC) $(LDFLAGS) -o philspel philspel.o hashtable.o
+	$(CC) $(LDFLAGS) -o philspel philspel.o hashtable.o -lm
 
 philspel.o : philspel.c philspel.h hashtable.h
 	$(CC) $(CFLAGS) philspel.c

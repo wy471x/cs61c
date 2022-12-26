@@ -38,6 +38,9 @@
  */
 #include <unistd.h>
 
+#define DELIMITER " "
+#define FLAG " [sic]"
+
 /*
  * This hash table stores the dictionary.
  */
@@ -140,7 +143,7 @@ void readDictionary(char *dictName) {
     FILE *fp = fopen(dictName, "r");
     char word[60];
     while (fscanf(fp, "%s", word)) {
-        insertData(dictionary, word);
+        insertData(dictionary, word, word);
     }
 }
 
@@ -169,9 +172,61 @@ void processInput() {
     // -- TODO --
     char strings[100];
     gets(strings);
-    int i = 0, j =0;
-    char newString[200], word[60];
-    while (strings[i] != '\0') {
+    char newString[200];
+    char *word;
+    char *newPtr = newString;
 
+    word = strtok(strings, DELIMITER);
+    int len = strlen(word), fixedLen = strlen(FLAG);
+    if (isEnglishWord(word) && (findData(dictionary, word)
+                                || findData(dictionary, wordToLowercase(word))
+                                || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
+        strcpy(newPtr, word);
+        newPtr += len;
+        strcpy(newPtr, FLAG);
+        newPtr += fixedLen;
+    }
+
+    while (word != NULL) {
+        word = strtok(NULL, DELIMITER);
+        len = strlen(word);
+        if (isEnglishWord(word) && (findData(dictionary, word)
+                                    || findData(dictionary, wordToLowercase(word))
+                                    || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
+            strcpy(newPtr, word);
+            newPtr += len;
+            strcpy(newPtr, FLAG);
+            newPtr += fixedLen;
+        }
+    }
+    printf("%s\n", newString);
+}
+
+bool isEnglishWord(char *word) {
+    while (*word != '\0') {
+        if (!isalpha(*word)) {
+            return false;
+        }
+        word++;
+    }
+    return true;
+}
+
+char *wordToLowercase(char *word) {
+    char *result = word;
+    for (; *word; word++) {
+        *word = tolower(*word);
     }
 }
+
+char *allLetterToLowercaseExceptFirst(char *word) {
+    char *result = word;
+    word++;
+    for (; *word; word++) {
+        *word = tolower(*word);
+    }
+    return result;
+}
+
+
+
