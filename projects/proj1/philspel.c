@@ -90,7 +90,11 @@ unsigned int stringHash(void *s) {
         i++;
         string++;
     }
-    return hashCode % dictionary->size;
+    return floorMod(hashCode, dictionary->size);
+}
+
+unsigned int floorMod(unsigned int x, unsigned int y) {
+    return x - (x / y) * y;
 }
 
 /*
@@ -171,25 +175,13 @@ void readDictionary(char *dictName) {
 void processInput() {
     // -- TODO --
     char strings[100];
-    gets(strings);
-    char newString[200];
-    char *word;
-    char *newPtr = newString;
+    while (fgets(strings, 100, stdin)) {
+        char newString[200];
+        char *word;
+        char *newPtr = newString;
 
-    word = strtok(strings, DELIMITER);
-    int len = strlen(word), fixedLen = strlen(FLAG);
-    if (isEnglishWord(word) && (findData(dictionary, word)
-                                || findData(dictionary, wordToLowercase(word))
-                                || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
-        strcpy(newPtr, word);
-        newPtr += len;
-        strcpy(newPtr, FLAG);
-        newPtr += fixedLen;
-    }
-
-    while (word != NULL) {
-        word = strtok(NULL, DELIMITER);
-        len = strlen(word);
+        word = strtok(strings, DELIMITER);
+        int len = strlen(word), fixedLen = strlen(FLAG);
         if (isEnglishWord(word) && (findData(dictionary, word)
                                     || findData(dictionary, wordToLowercase(word))
                                     || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
@@ -198,8 +190,21 @@ void processInput() {
             strcpy(newPtr, FLAG);
             newPtr += fixedLen;
         }
+
+        while (word != NULL) {
+            word = strtok(NULL, DELIMITER);
+            len = strlen(word);
+            if (isEnglishWord(word) && (findData(dictionary, word)
+                                        || findData(dictionary, wordToLowercase(word))
+                                        || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
+                strcpy(newPtr, word);
+                newPtr += len;
+                strcpy(newPtr, FLAG);
+                newPtr += fixedLen;
+            }
+        }
+        printf("%s\n", newString);
     }
-    printf("%s\n", newString);
 }
 
 bool isEnglishWord(char *word) {
@@ -217,6 +222,7 @@ char *wordToLowercase(char *word) {
     for (; *word; word++) {
         *word = tolower(*word);
     }
+    return result;
 }
 
 char *allLetterToLowercaseExceptFirst(char *word) {

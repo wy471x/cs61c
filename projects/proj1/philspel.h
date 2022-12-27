@@ -19,4 +19,6 @@ extern char* wordToLowercase(char* word);
 
 extern char* allLetterToLowercaseExceptFirst(char* word);
 
+extern unsigned int floorMod(unsigned int x, unsigned int y);
+
 #endif
