@@ -146,9 +146,10 @@ void readDictionary(char *dictName) {
 
     FILE *fp = fopen(dictName, "r");
     char word[60];
-    while (fscanf(fp, "%s", word)) {
+    while (fscanf(fp, "%s", word) != EOF) {
         insertData(dictionary, word, word);
     }
+    fclose(fp);
 }
 
 /*
@@ -181,18 +182,8 @@ void processInput() {
         char *newPtr = newString;
 
         word = strtok(strings, DELIMITER);
-        int len = strlen(word), fixedLen = strlen(FLAG);
-        if (isEnglishWord(word) && (findData(dictionary, word)
-                                    || findData(dictionary, wordToLowercase(word))
-                                    || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
-            strcpy(newPtr, word);
-            newPtr += len;
-            strcpy(newPtr, FLAG);
-            newPtr += fixedLen;
-        }
-
+        int fixedLen = strlen(FLAG), len;
         while (word != NULL) {
-            word = strtok(NULL, DELIMITER);
             len = strlen(word);
             if (isEnglishWord(word) && (findData(dictionary, word)
                                         || findData(dictionary, wordToLowercase(word))
@@ -202,6 +193,7 @@ void processInput() {
                 strcpy(newPtr, FLAG);
                 newPtr += fixedLen;
             }
+            word = strtok(NULL, DELIMITER);
         }
         printf("%s\n", newString);
     }
