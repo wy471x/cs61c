@@ -8,8 +8,8 @@ unsigned int floorMod(unsigned int x, unsigned int y);
 
 unsigned int stringHash(void *s);
 
-int main(int argc, char** argv) {
-    char strings[100] = "\0";
+int main(int argc, char **argv) {
+//    char strings[100] = "\0";
 //    while (fgets(strings, 100, stdin)) {
 //        printf("%s\n", strings);
 //        printf("%d\n", stringHash(strings));
@@ -43,9 +43,20 @@ int main(int argc, char** argv) {
 //    }
 //
 //    return(0);
-    printf("%d\n", stringHash("this"));
-    printf("%s\n", strings);
-    printf("%ld\n", strlen(strings));
+//    printf("%d\n", stringHash("this"));
+//    printf("%s\n", strings);
+//    printf("%ld\n", strlen(strings));
+    char strings[60] = "this is a misspelled word.";
+    char *ptr = strings;
+    char newString[60] = "";
+    char *newPtr = newString;
+    while (*ptr != '\0') {
+        strcpy(newPtr, ptr);
+        ptr++;
+        newPtr++;
+    }
+    printf("string: %s, new string: %s\n", strings, newString);
+    printf("%ld\n", strlen(""));
 }
 
 unsigned int stringHash(void *s) {

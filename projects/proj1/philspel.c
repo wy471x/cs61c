@@ -178,39 +178,48 @@ void processInput() {
     char strings[100];
     while (fgets(strings, 100, stdin)) {
         char newString[200] = "";
-        char *word;
+        char word[61];
         char *newPtr = newString;
-
-        word = strtok(strings, DELIMITER);
+        char *ptr = strings;
         int fixedLen = strlen(FLAG), len;
-        while (word != NULL) {
-            len = strlen(word);
-            // 1.The word itself.
-            // 2.The word converted entirely to lowercase letters
-            // 3.The word with all but the first letter converted to lowercase.
-            if (isEnglishWord(word)) {
-                if (findData(dictionary, word)
-                    || findData(dictionary, wordToLowercase(word))
-                    || findData(dictionary, allLetterToLowercaseExceptFirst(word))) {
+        while (*ptr != '\0') {
+            if (isalpha(*ptr)) {
+                parseWord(ptr, word);
+                len = strlen(word);
+                // 1.The word itself.
+                // 2.The word converted entirely to lowercase letters
+                // 3.The word with all but the first letter converted to lowercase.
+                if (findData(dictionary, word) != NULL
+                    || findData(dictionary, wordToLowercase(word)) != NULL
+                    || findData(dictionary, allLetterToLowercaseExceptFirst(word)) != NULL) {
                     strcpy(newPtr, word);
                     newPtr += len;
-                }  else {
+                } else {
                     strcpy(newPtr, word);
                     newPtr += len;
                     strcpy(newPtr, FLAG);
                     newPtr += fixedLen;
                 }
             } else {
-                strcpy(newPtr, word);
-                newPtr += len;
+                strcpy(newPtr, ptr);
+                newPtr++;
+                ptr++;
             }
-
-            word = strtok(NULL, DELIMITER);
         }
         printf("%s\n", newString);
     }
 }
 
+void parseWord(char *string, char *word) {
+    int i = 0;
+    while (isalpha(*string)) {
+        word[i++] = *string;
+        string++;
+    }
+    word[i] = '\0';
+}
+
+// Deprecated
 bool isEnglishWord(char *word) {
     while (*word != '\0') {
         if (!isalpha(*word)) {

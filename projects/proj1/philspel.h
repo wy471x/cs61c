@@ -21,4 +21,5 @@ extern char* allLetterToLowercaseExceptFirst(char* word);
 
 extern unsigned int floorMod(unsigned int x, unsigned int y);
 
+extern void parseWord(char *string, char *word);
 #endif
