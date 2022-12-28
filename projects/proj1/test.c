@@ -9,7 +9,7 @@ unsigned int floorMod(unsigned int x, unsigned int y);
 unsigned int stringHash(void *s);
 
 int main(int argc, char** argv) {
-    char strings[100];
+    char strings[100] = "\0";
 //    while (fgets(strings, 100, stdin)) {
 //        printf("%s\n", strings);
 //        printf("%d\n", stringHash(strings));
@@ -44,6 +44,8 @@ int main(int argc, char** argv) {
 //
 //    return(0);
     printf("%d\n", stringHash("this"));
+    printf("%s\n", strings);
+    printf("%ld\n", strlen(strings));
 }
 
 unsigned int stringHash(void *s) {

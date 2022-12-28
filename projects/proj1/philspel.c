@@ -177,7 +177,7 @@ void processInput() {
     // -- TODO --
     char strings[100];
     while (fgets(strings, 100, stdin)) {
-        char newString[200];
+        char newString[200] = "";
         char *word;
         char *newPtr = newString;
 
@@ -185,14 +185,26 @@ void processInput() {
         int fixedLen = strlen(FLAG), len;
         while (word != NULL) {
             len = strlen(word);
-            if (isEnglishWord(word) && (findData(dictionary, word)
-                                        || findData(dictionary, wordToLowercase(word))
-                                        || findData(dictionary, allLetterToLowercaseExceptFirst(word)))) {
+            // 1.The word itself.
+            // 2.The word converted entirely to lowercase letters
+            // 3.The word with all but the first letter converted to lowercase.
+            if (isEnglishWord(word)) {
+                if (findData(dictionary, word)
+                    || findData(dictionary, wordToLowercase(word))
+                    || findData(dictionary, allLetterToLowercaseExceptFirst(word))) {
+                    strcpy(newPtr, word);
+                    newPtr += len;
+                }  else {
+                    strcpy(newPtr, word);
+                    newPtr += len;
+                    strcpy(newPtr, FLAG);
+                    newPtr += fixedLen;
+                }
+            } else {
                 strcpy(newPtr, word);
                 newPtr += len;
-                strcpy(newPtr, FLAG);
-                newPtr += fixedLen;
             }
+
             word = strtok(NULL, DELIMITER);
         }
         printf("%s\n", newString);
