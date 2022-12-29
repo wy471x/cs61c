@@ -194,11 +194,13 @@ void processInput() {
                     || findData(dictionary, allLetterToLowercaseExceptFirst(word)) != NULL) {
                     strcpy(newPtr, word);
                     newPtr += len;
+                    ptr += len;
                 } else {
                     strcpy(newPtr, word);
                     newPtr += len;
                     strcpy(newPtr, FLAG);
                     newPtr += fixedLen;
+                    ptr += len + fixedLen;
                 }
             } else {
                 strcpy(newPtr, ptr);
