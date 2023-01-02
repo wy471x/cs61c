@@ -2,10 +2,21 @@
 #include <math.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <ctype.h>
 
 #define MAXWORD 100
+#define BUFSIZE 100
+#define MAXLINES 5000
+#define MAXLINE 1000
+#define MAXLEN 1000
+#define ALLOCSIZE 10000
+
+static char allocbuf[ALLOCSIZE];
+static char *allocp = allocbuf;
+char *lineptr[MAXLINES];
+char buf[BUFSIZE];
+int bufp = 0;
 
 struct list {
     int item;
@@ -30,6 +41,10 @@ struct key {
 };
 #define NKEYS (sizeof keytab / sizeof(struct key))
 
+//int getch();
+
+void ungetch(int c);
+
 unsigned int floorMod(unsigned int x, unsigned int y);
 
 unsigned int stringHash(void *s);
@@ -38,82 +53,79 @@ int getword(char *, int);
 
 struct key *binsearch(char *, struct key *, int);
 
-int main(int argc, char **argv) {
-//    char strings[100] = "\0";
-//    while (fgets(strings, 100, stdin)) {
-//        printf("%s\n", strings);
-//        printf("%d\n", stringHash(strings));
-//        printf("%d\n", floorMod(stringHash(strings), 2255));
-//    }
-//strlen(NULL);
+int readlines(char *lineptr[], int nlines);
 
-//    if (access(argv[1], F_OK) != 0) {
-//        fprintf(stderr, "specified file is not exist.");
-//        exit(1);
-//    }
-//
-//    FILE *fp = fopen(argv[1], "r");
-//    char word[60];
-//    while (fscanf(fp, "%s", word) != EOF) {
-//        printf("%s\n", word);
-//    }
-//    fclose(fp);
-//    char str[80] = "This is - www.tutorialspoint.com - website";
-//    const char s[2] = "-";
-//    char *token;
-//
-//    /* get the first token */
-//    token = strtok(str, s);
-//
-//    /* walk through other tokens */
-//    while( token != NULL ) {
-//        printf( " %s\n", token );
-//
-//        token = strtok(NULL, s);
-//    }
-//
-//    return(0);
-//    printf("%d\n", stringHash("this"));
-//    printf("%s\n", strings);
-//    printf("%ld\n", strlen(strings));
-//    char strings[60] = "this is a misspelled word.";
-//    char *ptr = strings;
-//    char newString[60] = "";
-//    char *newPtr = newString;
-//    while (*ptr != '\0') {
-//        strcpy(newPtr, ptr);
-//        ptr++;
-//        newPtr++;
-//    }
-//    printf("string: %s, new string: %s\n", strings, newString);
-//    printf("%ld\n", strlen(""));
-//    char **dPtr = malloc(sizeof(char *) * 10);
-//    char str[10][2] = {"01", "23","45","67","89", "ab","cd","ef","gh","ij"};
-//    for (int i = 0; i < 10; i++) {
-//        dPtr[i] = str[i];
-//    }
-//    for (int i = 0; i < 10; i++) {
-//        printf("%s\n", dPtr[i]);
-//    }
-    char word[MAXWORD];
-    struct key *p;
-    while (getword(word, MAXWORD) != EOF) {
-        if (isalpha(word[0])) {
-            if ((p = binsearch(word, keytab, NKEYS)) != NULL) {
-                p->count++;
-            }
-        }
-    }
-    for (p = keytab; p < keytab + NKEYS; p++) {
-        if (p->count > 0) {
-            printf("%4d %s\n", p->count, p->word);
-        }
-    }
+void writelines(char *lineptr[], int nlines);
+
+void qsort(char *lineptr[], int left, int right);
+
+int getlineself(char s[], int lim);
+
+char *alloc(int n);
+
+void afree(char *p);
+
+void swap(char *v[], int i, int j);
+
+//void test1();
+
+//void test2();
+
+int test3();
+
+int main(int argc, char **argv) {
+//    test1();
+//    test2();
+    test3();
     return 0;
 }
 
-void test1() {
-    struct list *lp, *prevlp;
+//int getch() {
+//    return (bufp > 0) ? buf[--bufp] : getchar();
+//}
+
+void ungetch(int c) {
+    if (bufp >= BUFSIZE) {
+        printf("ungetch: too many characters\n");
+    } else {
+        buf[bufp++] = c;
+    }
+}
+
+//void test1() {
+//    char word[MAXWORD];
+//    struct key *p;
+//    while (getword(word, MAXWORD) != EOF) {
+//        if (isalpha(word[0])) {
+//            if ((p = binsearch(word, keytab, NKEYS)) != NULL) {
+//                p->count++;
+//            }
+//        }
+//    }
+//    for (p = keytab; p < keytab + NKEYS; p++) {
+//        if (p->count > 0) {
+//        printf("%4d %s\n", p->count, p->word);
+//        }
+//    }
+//}
+
+//void test2() {
+//    char word[MAXWORD];
+//    int result = getword(word, MAXWORD);
+//    printf("%d", result);
+//}
+
+int test3() {
+    int nlines;
+
+    if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
+        qsort(lineptr, 0, nlines - 1);
+        writelines(lineptr, nlines);
+        return 0;
+    } else {
+        printf("error: input too big to sort\n");
+        return 1;
+    }
 }
 
 unsigned int stringHash(void *s) {
@@ -133,30 +145,29 @@ unsigned int floorMod(unsigned int x, unsigned int y) {
     return x - (x / y) * y;
 }
 
-int getword(char *word, int lim) {
-    int c, getch(void);
-    void ungetch(int);
-    char *w = word;
-
-    while (isspace(c = getch()))
-        ;
-    if (c != EOF) {
-        *w++ = c;
-    }
-    if (!isalpha(c)) {
-        *w = '\0';
-        return c;
-    }
-
-    for (; --lim > 0; w++) {
-        if (!isalnum(*w = getch())) {
-            ungetch(*w);
-            break;
-        }
-    }
-    *w = '\0';
-    return word[0];
-}
+//int getword(char *word, int lim) {
+//    int c, getch(void);
+//    void ungetch(int);
+//    char *w = word;
+//
+//    while (isspace(c = getch()));
+//    if (c != EOF) {
+//        *w++ = c;
+//    }
+//    if (!isalpha(c)) {
+//        *w = '\0';
+//        return c;
+//    }
+//
+//    for (; --lim > 0; w++) {
+//        if (!isalnum(*w = getch())) {
+//            ungetch(*w);
+//            break;
+//        }
+//    }
+//    *w = '\0';
+//    return word[0];
+//}
 
 struct key *binsearch(char *word, struct key *tab, int n) {
     int cond;
@@ -174,4 +185,86 @@ struct key *binsearch(char *word, struct key *tab, int n) {
             return mid;
     }
     return NULL;
+}
+
+int getlineself(char s[], int lim) {
+    int c, i;
+
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+        s[i] = c;
+    }
+    if (c == '\n') {
+        s[i] = c;
+        i++;
+    }
+    s[i] = '\0';
+    return i;
+}
+
+int readlines(char *lineptr[], int maxlines) {
+    int len, nlines;
+    char *p, line[MAXLINE];
+
+    nlines = 0;
+    while ((len = getlineself(line, MAXLEN)) > 0) {
+        if (nlines >= maxlines || (p = alloc(len)) == NULL) {
+            return -1;
+        } else {
+            line[len - 1] = '\0';
+            strcpy(p, line);
+            lineptr[nlines++] = p;
+        }
+    }
+    return nlines;
+}
+
+void writelines(char *lineptr[], int nlines) {
+    int i;
+
+    for (i = 0; i < nlines; i++) {
+        printf("%s\n", lineptr[i]);
+    }
+}
+
+void qsort(char *v[], int left, int right) {
+    int i, last;
+    void swap(char *v[], int i, int j);
+
+    if (left >= right) {
+        return;
+    }
+
+    swap(v, left, (left + right) / 2);
+    last = left;
+    for (i = left + 1; i <= right; i++) {
+        if (strcmp(v[i], v[left]) < 0) {
+            swap(v, ++last, i);
+        }
+    }
+    swap(v, left, last);
+    qsort(v, left, last - 1);
+    qsort(v, last + 1, right);
+}
+
+void swap(char *v[], int i, int j) {
+    char *temp;
+
+    temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
+}
+
+char *alloc(int n) {
+    if (allocbuf + ALLOCSIZE - allocp >= n) {
+        allocp += n;
+        return allocp - n;
+    } else {
+        return 0;
+    }
+}
+
+void afree(char *p) {
+    if (p >= allocbuf && p < allocbuf + ALLOCSIZE) {
+        allocp = p;
+    }
 }
