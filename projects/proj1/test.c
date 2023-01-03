@@ -4,6 +4,7 @@
 #include <unistd.h>
 //#include <stdlib.h>
 #include <ctype.h>
+#include <malloc.h>
 
 #define MAXWORD 100
 #define BUFSIZE 100
@@ -14,7 +15,8 @@
 
 static char allocbuf[ALLOCSIZE];
 static char *allocp = allocbuf;
-char *lineptr[MAXLINES];
+//char *lineptr[MAXLINES];
+char **lineptr;
 char buf[BUFSIZE];
 int bufp = 0;
 
@@ -117,7 +119,7 @@ void ungetch(int c) {
 
 int test3() {
     int nlines;
-
+    lineptr = (char **)malloc(sizeof(char *) * MAXLINES);
     if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
         qsort(lineptr, 0, nlines - 1);
         writelines(lineptr, nlines);

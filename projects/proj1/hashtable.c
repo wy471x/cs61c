@@ -33,16 +33,16 @@ void insertData(HashTable *table, void *key, void *data) {
     // 1. Find the right hash bucket location with table->hashFunction.
     int loc = table->hashFunction(key);
     // 2. Allocate a new hash bucket struct.
-    struct HashBucket element;
-    element.key = key;
-    element.data = data;
-    element.next = NULL;
+    struct HashBucket *element = malloc(sizeof(struct HashBucket));
+    element->key = key;
+    element->data = data;
+    element->next = NULL;
     // 3. Append to the linked list or create it if it does not yet exist.
     if (table->data[loc] == NULL) {
-        table->data[loc] = &element;
+        table->data[loc] = element;
     } else {
-        element.next = table->data[loc]->next;
-        table->data[loc] = &element;
+        element->next = table->data[loc]->next;
+        table->data[loc] = element;
     }
 }
 
