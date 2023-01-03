@@ -1,5 +1,6 @@
 #include "hashtable.h"
 #include <stdlib.h>
+#include <string.h>
 
 /*
  * This creates a new hash table of the specified size and with
@@ -34,8 +35,11 @@ void insertData(HashTable *table, void *key, void *data) {
     int loc = table->hashFunction(key);
     // 2. Allocate a new hash bucket struct.
     struct HashBucket *element = malloc(sizeof(struct HashBucket));
-    element->key = key;
-    element->data = data;
+    char *copyKey = malloc(sizeof(char) * strlen(key)), *copyData = malloc(sizeof(char) * strlen(data));
+    strcpy(copyKey, key);
+    strcpy(copyData, data);
+    element->key = copyKey;
+    element->data = copyData;
     element->next = NULL;
     // 3. Append to the linked list or create it if it does not yet exist.
     if (table->data[loc] == NULL) {
