@@ -45,7 +45,7 @@ void insertData(HashTable *table, void *key, void *data) {
     if (table->data[loc] == NULL) {
         table->data[loc] = element;
     } else {
-        element->next = table->data[loc]->next;
+        element->next = table->data[loc];
         table->data[loc] = element;
     }
 }

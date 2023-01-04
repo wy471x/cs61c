@@ -200,7 +200,7 @@ void processInput() {
                     newPtr += len;
                     strcpy(newPtr, FLAG);
                     newPtr += fixedLen;
-                    ptr += len + fixedLen;
+                    ptr += len;
                 }
             } else {
                 strcpy(newPtr, ptr);
