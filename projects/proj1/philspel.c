@@ -194,21 +194,20 @@ void processInput() {
                     || findData(dictionary, allLetterToLowercaseExceptFirst(word)) != NULL) {
                     strcpy(newPtr, word);
                     newPtr += len;
-                    ptr += len;
                 } else {
                     strcpy(newPtr, word);
                     newPtr += len;
                     strcpy(newPtr, FLAG);
                     newPtr += fixedLen;
-                    ptr += len;
                 }
+                ptr += len;
             } else {
                 strcpy(newPtr, ptr);
                 newPtr++;
                 ptr++;
             }
         }
-        printf("%s\n", newString);
+        printf("%s", newString);
     }
 }
 
@@ -233,19 +232,24 @@ bool isEnglishWord(char *word) {
 }
 
 char *wordToLowercase(char *word) {
-    char *result = word;
+    char *result = malloc(sizeof(char) * strlen(word));
+    int i = 0;
     for (; *word; word++) {
-        *word = tolower(*word);
+        result[i++] = tolower(*word);
     }
+    result[i] = '\0';
     return result;
 }
 
 char *allLetterToLowercaseExceptFirst(char *word) {
-    char *result = word;
+    char *result = malloc(sizeof(char) * strlen(word));
+    int i = 0;
+    result[i++] = *word;
     word++;
     for (; *word; word++) {
-        *word = tolower(*word);
+        result[i++] = tolower(*word);
     }
+    result[i] = '\0';
     return result;
 }
 
