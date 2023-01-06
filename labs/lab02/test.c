@@ -9,9 +9,9 @@ void test2(int x, int n, int v);
 void test3(int x, int n);
 
 int main(int argc, char **argv) {
-//    test1(atoi(argv[1]), atoi(argv[2]));
+    test1(atoi(argv[1]), atoi(argv[2]));
 //    test2(atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
-    test3(atoi(argv[1]), atoi(argv[2]));
+//    test3(atoi(argv[1]), atoi(argv[2]));
     return 0;
 }
 
