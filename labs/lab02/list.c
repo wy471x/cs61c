@@ -36,7 +36,7 @@ void reverse_list (node** head_ptr) {
         curr = next;
 	}
 	/* Set the new head to be what originally was the last node in the list */
-	*head_ptr = curr;/* INSERT CODE HERE */
+	*head_ptr = prev;/* INSERT CODE HERE */
 }
 
 

@@ -48,6 +48,7 @@ int main() {
 	}
 
 	reverse_list(head_ptr);
+    printf("list size: %d\n", list_size(head_ptr));
 	is_correct = is_correct && list_size(head_ptr) == 10;
 	node* head = *head_ptr;
 	node* curr = head;
@@ -92,9 +93,9 @@ int main() {
 		    (*smallList)->val, (*smallList)->next);
 
 	if (is_correct) {
-		printf("\n\n--------------TEST PASSED----------------");
+		printf("\n\n--------------TEST PASSED----------------\n");
 	} else{
-		printf("\n\n--------------TEST FAILED----------------");
+		printf("\n\n--------------TEST FAILED----------------\n");
 	}
 
 	return !is_correct;
