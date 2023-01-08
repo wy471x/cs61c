@@ -31,16 +31,16 @@ int main(int argc, char **argv) {
     vector_set(v, 25, 43);
 
     printf("These should be equal:\n");
-    printf("98 = %d\n", vector_get(v, 0));
-    printf("15 = %d\n", vector_get(v, 11));
-    printf("65 = %d\n", vector_get(v, 24));
-    printf("-123 = %d\n", vector_get(v, 12));
-    printf("21 = %d\n", vector_get(v, 15));
-    printf("43 = %d\n", vector_get(v, 25));
-    printf("0 = %d\n", vector_get(v, 23));
-    printf("0 = %d\n", vector_get(v, 1));
-    printf("0 = %d\n", vector_get(v, 501));
-    printf("3 = %d\n", vector_get(v, 500));
+    printf("98 = %d\n", vector_get(v, 0)); // 98
+    printf("15 = %d\n", vector_get(v, 11)); // 15
+    printf("65 = %d\n", vector_get(v, 24)); // 65
+    printf("-123 = %d\n", vector_get(v, 12)); // -123
+    printf("21 = %d\n", vector_get(v, 15)); // -23
+    printf("43 = %d\n", vector_get(v, 25)); // 43
+    printf("0 = %d\n", vector_get(v, 23)); // 0
+    printf("0 = %d\n", vector_get(v, 1)); // 0
+    printf("0 = %d\n", vector_get(v, 501)); // 0
+    printf("3 = %d\n", vector_get(v, 500)); // 0
 
     vector_delete(v);
 
