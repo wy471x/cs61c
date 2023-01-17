@@ -1,0 +1,4 @@
+1. What do the .data, .word, .text directives mean (i.e. what do you use them for)? Hint: think about the 4 sections of memory.
+Answer:
+    the code (instructions basically) are in a segment called .text.
+    the pre-initialized data is .data and the uninitialized data is .bss.
