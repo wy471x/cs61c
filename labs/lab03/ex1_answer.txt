@@ -2,3 +2,12 @@
 Answer:
     the code (instructions basically) are in a segment called .text.
     the pre-initialized data is .data and the uninitialized data is .bss.
+    the size of data is .word.
+
+2. Run the program to completion. What number did the program output? What does this number represent?
+Answer:
+    the program output is 34.
+    34 represent result of fib(9).
+
+3. At what address is n stored in memory? Hint: Look at the contents of the registers.
+Answer:
