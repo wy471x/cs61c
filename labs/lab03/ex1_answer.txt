@@ -11,3 +11,11 @@ Answer:
 
 3. At what address is n stored in memory? Hint: Look at the contents of the registers.
 Answer:
+    t3 is 0x10000010, so n at 0x10000010.
+
+4. Without actually editing the code (i.e. without going into the “Editor” tab),
+   have the program calculate the 13th fib number (0-indexed) by manually modifying the value of a register.
+   You may find it helpful to first step through the code. If you prefer to look at decimal values,
+   change the “Display Settings” option at the bottom.
+Answer:
+   mofifying the value of t3, we can look result is 233.
