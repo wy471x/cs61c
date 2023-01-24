@@ -1,78 +1,66 @@
 	.file	"factorial.c"
+	.option nopic
+	.attribute arch, "rv64i2p0_m2p0_a2p0_f2p0_d2p0_c2p0"
+	.attribute unaligned_access, 0
+	.attribute stack_align, 16
 	.text
+	.align	1
 	.globl	main
 	.type	main, @function
 main:
-.LFB6:
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movl	%edi, -4(%rbp)
-	movq	%rsi, -16(%rbp)
-	movq	-16(%rbp), %rax
-	addq	$8, %rax
-	movq	(%rax), %rax
-	movq	%rax, %rdi
-	call	atoi@PLT
-	movl	%eax, %edi
+	addi	sp,sp,-32
+	sd	ra,24(sp)
+	sd	s0,16(sp)
+	addi	s0,sp,32
+	mv	a5,a0
+	sd	a1,-32(s0)
+	sw	a5,-20(s0)
+	ld	a5,-32(s0)
+	addi	a5,a5,8
+	ld	a5,0(a5)
+	mv	a0,a5
+	call	atoi
+	mv	a5,a0
+	mv	a0,a5
 	call	factorial
-	movl	$0, %eax
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE6:
+	li	a5,0
+	mv	a0,a5
+	ld	ra,24(sp)
+	ld	s0,16(sp)
+	addi	sp,sp,32
+	jr	ra
 	.size	main, .-main
+	.align	1
 	.globl	factorial
 	.type	factorial, @function
 factorial:
-.LFB7:
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movl	%edi, -4(%rbp)
-	cmpl	$1, -4(%rbp)
-	jne	.L4
-	movl	-4(%rbp), %eax
-	jmp	.L5
+	addi	sp,sp,-32
+	sd	ra,24(sp)
+	sd	s0,16(sp)
+	addi	s0,sp,32
+	mv	a5,a0
+	sw	a5,-20(s0)
+	lw	a5,-20(s0)
+	sext.w	a4,a5
+	li	a5,1
+	bne	a4,a5,.L4
+	lw	a5,-20(s0)
+	j	.L5
 .L4:
-	movl	-4(%rbp), %eax
-	subl	$1, %eax
-	movl	%eax, %edi
+	lw	a5,-20(s0)
+	addiw	a5,a5,-1
+	sext.w	a5,a5
+	mv	a0,a5
 	call	factorial
-	imull	-4(%rbp), %eax
+	mv	a5,a0
+	lw	a4,-20(s0)
+	mulw	a5,a4,a5
+	sext.w	a5,a5
 .L5:
-	leave
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE7:
+	mv	a0,a5
+	ld	ra,24(sp)
+	ld	s0,16(sp)
+	addi	sp,sp,32
+	jr	ra
 	.size	factorial, .-factorial
-	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
-	.section	.note.GNU-stack,"",@progbits
-	.section	.note.gnu.property,"a"
-	.align 8
-	.long	 1f - 0f
-	.long	 4f - 1f
-	.long	 5
-0:
-	.string	 "GNU"
-1:
-	.align 8
-	.long	 0xc0000002
-	.long	 3f - 2f
-2:
-	.long	 0x3
-3:
-	.align 8
-4:
+	.ident	"GCC: (g2ee5e430018) 12.2.0"
