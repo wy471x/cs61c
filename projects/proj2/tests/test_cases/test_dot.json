@@ -1,8 +1,15 @@
-{
+[{
     "name": "Basic Dot Test",
     "id": "dot",
     "test_file": "test_dot.s",
     "args": ["-it", "-ms", "-1"],
     "stdout": "285\n",
     "exitcode": 0
-}
+},{
+    "name": "Basic Dot Test",
+    "id": "dot",
+    "test_file": "test_dot_2.s",
+    "args": ["-it", "-ms", "-1"],
+    "stdout": "22\n",
+    "exitcode": 0
+}]

@@ -60,6 +60,7 @@ class TestCase:
             self.TEST_COUNTER += 1
             self.printf("*" * 40)
             filepath = os.path.join(test_file_path, self.test_file)
+            print(["java", "-jar", self.VENUS_PATH, filepath] + self.args)
             p = subprocess.Popen(["java", "-jar", self.VENUS_PATH, filepath] + self.args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=self.cwd, universal_newlines = True, bufsize=100)
             try:
                 out, err = p.communicate(timeout = self.timeout)
@@ -134,6 +135,8 @@ class TestCase:
 def load_tests(path):
     tests = []
     files = os.listdir(path)
+    print(f"DEBUG: {path}")
+    print(f"DEBUG: {files}")
     for file in files:
         if file.endswith(".json"):
             try:
@@ -150,6 +153,7 @@ def load_tests(path):
                 print(f"Could not load tests in {file}!")
                 import traceback
                 traceback.print_exc()
+    print(f"DEBUG: {tests}")
     return tests
 
 def main(args):

@@ -13,8 +13,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51c40222-9445-4362-9bb4-e600fe1930d4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/assembly/test_argmax_2.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/assembly/test_dot_2.s" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/assembly/test_relu_2.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_cases/test_relu_2.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cases/test_relu_2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/assembly/test_dot.s" beforeDir="false" afterPath="$PROJECT_DIR$/tests/assembly/test_dot.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/runner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cases/test_argmax.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cases/test_argmax.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cases/test_dot.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cases/test_dot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cases/test_relu.json" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_cases/test_relu.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_cases/test_relu_2.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +71,7 @@
       <workItem from="1674617048235" duration="14629000" />
       <workItem from="1674735696093" duration="12176000" />
       <workItem from="1674879864341" duration="2811000" />
+      <workItem from="1674904585607" duration="7162000" />
     </task>
     <servers />
   </component>
