@@ -47,7 +47,7 @@ write_matrix:
     mv a1, s0
     li a2, 1
     jal fopen
-    blt a0, x0, exit_64
+    blt a0, x0, exit_53
     mv s5, a0
 
     addi  sp, sp, -4
@@ -57,7 +57,7 @@ write_matrix:
     li a3, 1
     li a4, 4
     jal fwrite
-    blt a0, x0, exit_67
+    blt a0, x0, exit_54
 
     sw s3, 0(sp)
     mv a1, s5
@@ -65,7 +65,7 @@ write_matrix:
     li a3, 1
     li a4, 4
     jal fwrite
-    blt a0, x0, exit_67
+    blt a0, x0, exit_54
     addi sp, sp, 4
 
     li s6, 0
@@ -80,19 +80,19 @@ loop_start:
     mv a3, s7
     li a4, 4
     jal fwrite
-    blt a0, x0, exit_67
+    blt a0, x0, exit_54
     add s6, s6, a0
     bne s6, s7, loop_start
 
     # fflush
     mv a0, s5
     jal fflush
-    bne a0, x0, exit_65
+    bne a0, x0, exit_55
 
     # close
     mv a1, s5
     jal fclose
-    blt a0, zero, exit_65
+    blt a0, zero, exit_55
 
     lw s0, 0(sp)
     lw s1, 4(sp)
@@ -108,14 +108,14 @@ loop_start:
     # Epilogue
     ret
 
-exit_64:
-    li a1, 64
+exit_53:
+    li a1, 53
     j exit2
 
-exit_65:
-    li a1, 65
+exit_54:
+    li a1, 54
     j exit2
 
-exit_67:
-    li a1, 67
+exit_55:
+    li a1, 55
     j exit2

@@ -14,13 +14,9 @@
   <component name="ChangeListManager">
     <list default="true" id="51c40222-9445-4362-9bb4-e600fe1930d4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/argmax.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/argmax.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dot.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/dot.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/matmul.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/matmul.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/read_matrix.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/read_matrix.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/relu.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/relu.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/assembly/test_matmul.s" beforeDir="false" afterPath="$PROJECT_DIR$/tests/assembly/test_matmul.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/write_matrix.s" beforeDir="false" afterPath="$PROJECT_DIR$/src/write_matrix.s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/assembly/test_read_matrix.s" beforeDir="false" afterPath="$PROJECT_DIR$/tests/assembly/test_read_matrix.s" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/assembly/test_write_matrix.s" beforeDir="false" afterPath="$PROJECT_DIR$/tests/assembly/test_write_matrix.s" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +67,7 @@
       <workItem from="1674879864341" duration="2811000" />
       <workItem from="1674904585607" duration="7281000" />
       <workItem from="1674964247957" duration="4735000" />
+      <workItem from="1674996356876" duration="5266000" />
     </task>
     <servers />
   </component>
