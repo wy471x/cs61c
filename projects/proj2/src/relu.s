@@ -34,7 +34,7 @@ loop_continue:
    j loop_start
 
 exit_relu:
-   li a1, 32
+   li a1, 8
    j exit2
 
 loop_end:

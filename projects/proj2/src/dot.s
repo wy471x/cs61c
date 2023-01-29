@@ -20,9 +20,9 @@
 dot:
     # Prologue
     li t0, 1
-    blt a2, t0, exit_32
-    blt a3, t0, exit_33
-    blt a4, t0, exit_33
+    blt a2, t0, exit_5
+    blt a3, t0, exit_6
+    blt a4, t0, exit_6
 
     # init
     add t0, x0, x0
@@ -50,10 +50,10 @@ loop_end:
     add a0, t0, zero
     ret
 
-exit_32:
-   li a1 32
+exit_5:
+   li a1, 5
    j exit2
 
-exit_33:
-   li a1, 33
+exit_6:
+   li a1, 6
    j exit2

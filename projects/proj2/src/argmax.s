@@ -41,7 +41,7 @@ update_max:
    j loop_continue
 
 exit_argmax:
-   li a1, 32
+   li a1, 7
    j exit2
 
 loop_end:

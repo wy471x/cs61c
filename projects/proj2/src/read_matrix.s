@@ -16,6 +16,8 @@
 # Returns:
 #   a0 (int*)  is the pointer to the matrix in memory
 #
+# If malloc returns an error,
+# this function exits with error code 49.
 # If you receive an fopen error or eof, 
 # this function exits with error code 50.
 # If you receive an fread error or eof,
@@ -44,20 +46,20 @@ read_matrix:
 	mv a1, s0
 	li a2, 0
 	jal fopen
-	blt a0, x0, exit_64
+	blt a0, x0, exit_50
 	mv s5, a0
 
 	mv a1, s5
 	mv a2, s1
 	li a3, 4
 	jal fread
-	blt a0, x0, exit_66
+	blt a0, x0, exit_51
 
 	mv a1, s5
 	mv a2, s2
 	li a3, 4
 	jal fread
-	blt a0, x0, exit_66
+	blt a0, x0, exit_51
 
 	# malloc matrix
 	lw t2, 0(s1)
@@ -66,7 +68,7 @@ read_matrix:
 	slli t2, t2, 2
 	mv a0, t2
 	jal malloc
-	beq a0, x0, exit_48
+	beq a0, x0, exit_49
 	mv s3, a0
 
 	li s6, 0
@@ -88,7 +90,7 @@ loop_start:
 loop_end:
     mv a1, s5
     jal fclose
-    blt a0, zero, exit_65
+    blt a0, zero, exit_52
 
     mv t0, s3
     lw s0, 0(sp)
@@ -105,18 +107,18 @@ loop_end:
     mv a0, t0
     ret
 
-exit_48:
-    li a1, 48
+exit_49:
+    li a1, 49
     j exit2
 
-exit_64:
-    li a1, 64
+exit_50:
+    li a1, 50
     j exit2
 
-exit_65:
-    li a1, 65
+exit_51:
+    li a1, 51
     j exit2
 
-exit_66:
-    li a1, 66
+exit_52:
+    li a1, 52
     j exit2

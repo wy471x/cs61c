@@ -26,10 +26,12 @@ matmul:
 
     # Error checks
     li t0, 1
-    blt a1, t0, exit_34
-    blt a2, t0, exit_34
-    blt a4, t0, exit_34
-    blt a5, t0, exit_34
+    blt a1, t0, exit_2
+    blt a2, t0, exit_2
+    blt a4, t0, exit_3
+    blt a5, t0, exit_3
+    bne a1, a5, exit_4
+    bne a2, a4, exit_4
 
     # Prologue
     # init
@@ -101,6 +103,14 @@ end:
     addi sp, sp, 16
     ret
 
-exit_34:
-   li a1, 34
+exit_2:
+   li a1, 2
+   j exit2
+
+exit_3:
+   li a1, 3
+   j exit2
+
+exit_4:
+   li a1, 4
    j exit2
