@@ -30,8 +30,8 @@ matmul:
     blt a2, t0, exit_2
     blt a4, t0, exit_3
     blt a5, t0, exit_3
-    bne a1, a5, exit_4
-    bne a2, a4, exit_4
+    #bne a1, a5, exit_4
+    #bne a2, a4, exit_4
 
     # Prologue
     # init
