@@ -74,7 +74,7 @@ mapLoop:
     addi t0, t0, 1      # increment the count
     bne t0, t2, mapLoop # repeat if we haven't reached the array size yet
 
-    la a0, 8(s0)        # load the address of the next node into a0
+    lw a0, 4(s0)        # load the address of the next node into a0
     lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
 
     jal  map            # recurse
