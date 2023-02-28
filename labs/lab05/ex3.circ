@@ -146,15 +146,16 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(750,440)" to="(750,450)"/>
     <wire from="(730,140)" to="(780,140)"/>
     <wire from="(920,430)" to="(920,500)"/>
+    <wire from="(170,120)" to="(170,130)"/>
     <wire from="(240,490)" to="(240,500)"/>
     <wire from="(640,70)" to="(700,70)"/>
     <wire from="(720,120)" to="(780,120)"/>
     <wire from="(720,560)" to="(760,560)"/>
     <wire from="(740,390)" to="(740,420)"/>
     <wire from="(240,460)" to="(240,480)"/>
-    <wire from="(140,130)" to="(180,130)"/>
     <wire from="(740,530)" to="(740,550)"/>
     <wire from="(740,570)" to="(740,590)"/>
+    <wire from="(140,130)" to="(170,130)"/>
     <wire from="(190,490)" to="(220,490)"/>
     <wire from="(680,120)" to="(680,160)"/>
     <wire from="(740,420)" to="(760,420)"/>
@@ -171,6 +172,7 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(920,510)" to="(950,510)"/>
     <wire from="(920,500)" to="(950,500)"/>
     <wire from="(870,110)" to="(900,110)"/>
+    <wire from="(170,120)" to="(180,120)"/>
     <wire from="(240,500)" to="(250,500)"/>
     <wire from="(240,460)" to="(250,460)"/>
     <wire from="(730,140)" to="(730,200)"/>
@@ -186,9 +188,6 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     <wire from="(720,420)" to="(730,420)"/>
     <wire from="(840,560)" to="(920,560)"/>
     <comp lib="0" loc="(140,130)" name="Pin">
-      <a name="label" val="Input_Bit"/>
-    </comp>
-    <comp lib="0" loc="(180,130)" name="Tunnel">
       <a name="label" val="Input_Bit"/>
     </comp>
     <comp lib="0" loc="(190,490)" name="Pin">
@@ -275,6 +274,9 @@ This file is intended to be loaded by Logisim-evolution (https://github.com/reds
     </comp>
     <comp lib="0" loc="(720,390)" name="Tunnel">
       <a name="facing" val="east"/>
+      <a name="label" val="Input_Bit"/>
+    </comp>
+    <comp lib="0" loc="(180,120)" name="Tunnel">
       <a name="label" val="Input_Bit"/>
     </comp>
   </circuit>
