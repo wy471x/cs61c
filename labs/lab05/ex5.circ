@@ -155,17 +155,9 @@ end TCL_Generic;
     <a name="clabelfont" val="SansSerif bold 16"/>
     <a name="circuitnamedbox" val="true"/>
     <a name="circuitvhdlpath" val=""/>
-    <wire from="(310,220)" to="(370,220)"/>
-    <wire from="(310,290)" to="(370,290)"/>
-    <wire from="(310,300)" to="(370,300)"/>
-    <wire from="(310,400)" to="(370,400)"/>
     <wire from="(230,300)" to="(290,300)"/>
-    <wire from="(310,220)" to="(310,280)"/>
     <wire from="(860,220)" to="(870,220)"/>
-    <wire from="(370,300)" to="(370,340)"/>
-    <wire from="(310,310)" to="(310,400)"/>
     <wire from="(230,220)" to="(250,220)"/>
-    <wire from="(370,280)" to="(370,290)"/>
     <comp lib="0" loc="(230,220)" name="Pin">
       <a name="width" val="16"/>
       <a name="label" val="A"/>
@@ -187,19 +179,6 @@ end TCL_Generic;
     <comp loc="(430,220)" name="rot8"/>
     <comp loc="(430,280)" name="rot4"/>
     <comp loc="(430,340)" name="rot2"/>
-    <comp lib="0" loc="(630,220)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="width" val="16"/>
-    </comp>
-    <comp lib="0" loc="(290,300)" name="Splitter">
-      <a name="fanout" val="4"/>
-      <a name="incoming" val="4"/>
-      <a name="appear" val="center"/>
-      <a name="bit0" val="3"/>
-      <a name="bit1" val="2"/>
-      <a name="bit2" val="1"/>
-      <a name="bit3" val="0"/>
-    </comp>
     <comp loc="(430,400)" name="rot1"/>
   </circuit>
   <circuit name="rot8">
