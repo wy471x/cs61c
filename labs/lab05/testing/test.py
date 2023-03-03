@@ -32,11 +32,7 @@ class TestCase():
         stdinf = open('nul')
       except Exception as e:
          print("Could not open nul or /dev/null. Program will most likely error now.")
-    # print("DEBUG: " + logisim_location)
-    print("DEBUG: " + self.circfile)
-    # proc = subprocess.Popen(["java","-jar",logisim_location,"-tty","table",self.circfile], stdin=stdinf, stdout=subprocess.PIPE)
-    cmd = "java -jar" + logisim_location + " -tty table " + self.circfile
-    proc = subprocess.Popen(cmd, stdin=stdinf, stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen(["java","-jar",logisim_location,"-tty","table",self.circfile], stdin=stdinf, stdout=subprocess.PIPE)
     try:
       reference = open(self.tracefile)
       passed = compare_unbounded(proc.stdout,reference, filename)
